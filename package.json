@@ -9,12 +9,15 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "bookshelf": "^1.2.0",
     "cors": "^2.8.5",
     "dotenv": "^16.0.1",
     "express": "^4.17.3",
-    "knex": "^1.0.3",
-    "mysql2": "^2.3.3",
-    "bcrypt": "^5.0.1"
+    "knex": "~0.21.0",
+    "mysql2": "^2.3.3"
+  },
+  "peerDependencies": {
+    "knex": ">=0.15.0 <0.22.0"
   }
 }
