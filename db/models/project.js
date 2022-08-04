@@ -41,6 +41,12 @@ class User extends BaseModel {
     return this.createOne({ ...data })
   }
 
+  update({ id, ...data }) {
+    return this.client(this.tableName)
+      .where({ id })
+      .update({ ...data })
+  }
+
  
 }
 
