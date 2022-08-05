@@ -28,6 +28,37 @@ class User extends BaseModel {
       .then(data => data.toJSON())
   }
 
+  search(filter, options = {}) {
+    const withRelated = ['image']
+
+    const pageSize = options?.limit || options?.pageSize || 10
+    const pageNumber = options?.page || options?.pageNumber || 1
+    const page = (pageNumber - 1) * pageSize;
+
+    const { type, role, location, ...filterRest } = filter
+
+    return this.bookshelfModel
+      .query(function (qb){ 
+        
+        qb.where({...filterRest})
+        if(type){
+          qb.where('name', 'LIKE', `%${type}%`)
+        }
+
+        if(role){
+          qb.where('name', 'LIKE', `%${role}%`)
+        }
+        
+        if(location){
+          qb.where('name', 'LIKE', `%${location}%`)
+        }
+
+
+      })
+      .fetchPage({ withRelated, pageSize, page })
+      .then(data => data.toJSON())
+  }
+
   findById(id) {
     const withRelated = ['image']
 
