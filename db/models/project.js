@@ -43,7 +43,11 @@ class User extends BaseModel {
         qb.where({...filterRest})
 
         if(type){
-          qb.where('type', 'LIKE', `%${type}%`)
+
+          type.forEach(function(value){
+            
+            qb.orWhere('type', 'LIKE', `%${value}%`)
+          })
         }
 
         if(role){
