@@ -41,16 +41,17 @@ class User extends BaseModel {
       .query(function (qb){ 
         
         qb.where({...filterRest})
+
         if(type){
-          qb.where('name', 'LIKE', `%${type}%`)
+          qb.where('type', 'LIKE', `%${type}%`)
         }
 
         if(role){
-          qb.where('name', 'LIKE', `%${role}%`)
+          qb.where('role', 'LIKE', `%${role}%`)
         }
         
         if(location){
-          qb.where('name', 'LIKE', `%${location}%`)
+          qb.where('location', 'LIKE', `%${location}%`)
         }
 
 
