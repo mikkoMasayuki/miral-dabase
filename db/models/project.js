@@ -95,10 +95,24 @@ class User extends BaseModel {
     return this.createOne({ ...data })
   }
 
+  insertImages(data) {
+    return this.client("project_image").insert(data)
+  }
+
   update({ id, ...data }) {
     return this.client(this.tableName)
       .where({ id })
       .update({ ...data })
+  }
+
+  updateImage(id, data){
+    return this.client("project_image")
+    .where({ project_id: id })
+    .del()
+    .then(proj => {
+      return this.client("project_image").insert(data)
+    })
+    
   }
 
  
