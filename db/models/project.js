@@ -76,14 +76,14 @@ class User extends BaseModel {
 
         }
 
-        if (status) {
-          qb.where('status', status)
-        }
-
-
       })
       .fetchPage({ withRelated, pageSize, page })
-      .then(data => data.toJSON())
+      .then(data => {
+
+        let tmp = data.toJSON();
+        tmp =  tmp.filter(val => val.status.includes(status))
+        return tmp
+      })
   }
 
   findById(id) {
