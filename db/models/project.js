@@ -81,7 +81,10 @@ class User extends BaseModel {
       .then(data => {
 
         let tmp = data.toJSON();
-        tmp =  tmp.filter(val => val.status.includes(status))
+        if(status){
+          tmp =  tmp.filter(val => val.status.includes(status))
+
+        }
         return tmp
       })
   }
