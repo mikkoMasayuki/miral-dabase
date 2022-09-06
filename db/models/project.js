@@ -35,7 +35,7 @@ class User extends BaseModel {
     const pageNumber = options?.page || options?.pageNumber || 1
     const page = (pageNumber - 1) * pageSize;
 
-    const { type, role, location, business, ...filterRest } = filter
+    const {status, type, role, location, business, ...filterRest } = filter
 
     return this.bookshelfModel
       .query(function (qb){ 
@@ -74,6 +74,10 @@ class User extends BaseModel {
             qb.orWhere('business', 'LIKE', `%${value}%`)
           })
 
+        }
+
+        if (status) {
+          qb.where('status', status)
         }
 
 
