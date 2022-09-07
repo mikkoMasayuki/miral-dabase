@@ -46,7 +46,7 @@ class User extends BaseModel {
 
           type.forEach(function(value){
             
-            qb.orWhere('type', 'LIKE', `%${value}%`)
+            qb.where('type', 'LIKE', `%${value}%`)
           })
         }
 
@@ -54,7 +54,7 @@ class User extends BaseModel {
 
           role.forEach(function(value){
             
-            qb.orWhere('role', 'LIKE', `%${value}%`)
+            qb.where('role', 'LIKE', `%${value}%`)
           })
         }
         
@@ -62,7 +62,7 @@ class User extends BaseModel {
 
           location.forEach(function(value){
             
-            qb.orWhere('location', 'LIKE', `%${value}%`)
+            qb.where('location', 'LIKE', `%${value}%`)
           })
 
         }
@@ -71,7 +71,7 @@ class User extends BaseModel {
 
           business.forEach(function(value){
             
-            qb.orWhere('business', 'LIKE', `%${value}%`)
+            qb.where('business', 'LIKE', `%${value}%`)
           })
 
         }
@@ -120,6 +120,12 @@ class User extends BaseModel {
       return this.client("project_image").insert(data)
     })
     
+  }
+
+  delete(id){
+    return this.client(this.tableName)
+    .where({ id })
+    .del()
   }
 
  
