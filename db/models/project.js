@@ -71,7 +71,7 @@ class User extends BaseModel {
 
           business.forEach(function(value){
             
-            qb.where('business', 'LIKE', `%${value}%`)
+            qb.where('business', value)
           })
 
         }
