@@ -46,7 +46,7 @@ class User extends BaseModel {
 
           type.forEach(function(value){
             
-            qb.orWhere('type', 'LIKE', `%${value}%`)
+            qb.where('type', 'LIKE', `%${value}%`)
           })
         }
 
@@ -106,14 +106,24 @@ class User extends BaseModel {
 
         }
 
-        // if(type){
-        //   type.forEach(function(value){
+        if(type){
+          
+          type.forEach(function(value){
             
-        //     tmpType.push(value)
-        //   })
-        //   tmp = tmp.filter(val => tmpType.includes(val.type))
+            tmpType.push(value)
+          })
 
-        // }
+          tmp.forEach(function(e, index, object){
+            let tmpType2 = e.type.split(',')
+
+            if (tmpType.filter(element => tmpType2.includes(element)).length == 0) {
+              object.splice(index, 1);
+            }
+          });
+          
+            // tmp = tmp.filter(val => tmpType.includes(val.type.split(",")))
+
+        }
 
         return tmp
       })
