@@ -46,7 +46,7 @@ class User extends BaseModel {
 
           type.forEach(function(value){
             
-            qb.where('type', 'LIKE', `%${value}%`)
+            qb.orWhere('type', 'LIKE', `%${value}%`)
           })
         }
 
@@ -54,7 +54,7 @@ class User extends BaseModel {
 
           role.forEach(function(value){
             
-            qb.where('role', 'LIKE', `%${value}%`)
+            qb.orWhere('role', 'LIKE', `%${value}%`)
           })
         }
         
@@ -62,7 +62,7 @@ class User extends BaseModel {
 
           location.forEach(function(value){
             
-            qb.where('location', 'LIKE', `%${value}%`)
+            qb.orWhere('location', 'LIKE', `%${value}%`)
           })
 
         }
@@ -71,20 +71,50 @@ class User extends BaseModel {
 
           business.forEach(function(value){
             
-            qb.where('business', value)
+            qb.orWhere('business', value)
           })
 
         }
 
+        qb.orderBy('name','ASC'); 
       })
       .fetchPage({ withRelated, pageSize, page })
       .then(data => {
-
+        let loc = []
+        let tmpType = []
+        let tmpBus = []
         let tmp = data.toJSON();
         if(status){
           tmp =  tmp.filter(val => val.status.includes(status))
+        }
+
+        if(location){
+          location.forEach(function(value){
+            
+            loc.push(value)
+          })
+          tmp = tmp.filter(val => loc.includes(val.location))
 
         }
+
+        if(business){
+          business.forEach(function(value){
+            
+            tmpBus.push(value)
+          })
+          tmp = tmp.filter(val => tmpBus.includes(val.business))
+
+        }
+
+        // if(type){
+        //   type.forEach(function(value){
+            
+        //     tmpType.push(value)
+        //   })
+        //   tmp = tmp.filter(val => tmpType.includes(val.type))
+
+        // }
+
         return tmp
       })
   }
