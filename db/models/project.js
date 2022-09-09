@@ -117,9 +117,11 @@ class User extends BaseModel {
             let tmpType2 = e.type.split(',')
 
             if (tmpType.filter(element => tmpType2.includes(element)).length == 0) {
-              object.splice(index, 1);
+              delete object[index];
             }
           });
+
+          tmp = tmp.filter(i => i)
           
             // tmp = tmp.filter(val => tmpType.includes(val.type.split(",")))
 
