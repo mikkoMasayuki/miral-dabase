@@ -46,7 +46,7 @@ class User extends BaseModel {
 
           type.forEach(function(value){
             
-            qb.where('type', 'LIKE', `%${value}%`)
+            qb.orWhere('type', 'LIKE', `%${value}%`)
           })
         }
 
