@@ -66,6 +66,7 @@ class User extends BaseModel {
           })
 
         }
+        
 
         if(business){
 
@@ -75,8 +76,17 @@ class User extends BaseModel {
           })
 
         }
+        
+        if (type.includes("Most Popular")) {
 
-        qb.orderBy('name','ASC'); 
+          qb.orderBy('rating','ASC'); 
+          
+        }else{
+
+          qb.orderBy('name','ASC'); 
+
+        }
+
       })
       .fetchPage({ withRelated, pageSize, page })
       .then(data => {
