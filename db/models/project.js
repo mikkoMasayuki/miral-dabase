@@ -77,13 +77,13 @@ class User extends BaseModel {
 
         }
         
-        if (type.includes("Most Popular")) {
+        if (type && type.includes("Most Popular")) {
 
           qb.orderBy('rating','ASC'); 
           
         }else{
 
-          qb.orderBy('name','ASC'); 
+          qb.orderBy('is_favorite','ASC'); 
 
         }
 
@@ -103,6 +103,7 @@ class User extends BaseModel {
             
             loc.push(value)
           })
+
           tmp = tmp.filter(val => loc.includes(val.location))
 
         }
