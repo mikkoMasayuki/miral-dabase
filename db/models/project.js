@@ -83,7 +83,7 @@ class User extends BaseModel {
           
         }else{
 
-          qb.orderBy('is_favorite','ASC'); 
+          qb.orderBy('name','ASC'); 
 
         }
 
