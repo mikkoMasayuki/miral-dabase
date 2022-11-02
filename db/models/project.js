@@ -35,7 +35,7 @@ class User extends BaseModel {
     const pageNumber = options?.page || options?.pageNumber || 1
     const page = (pageNumber - 1) * pageSize;
 
-    const {status, type, role, location, business, ...filterRest } = filter
+    const {status, type, role, location, business, order, ...filterRest } = filter
 
     return this.bookshelfModel
       .query(function (qb){ 
@@ -83,7 +83,11 @@ class User extends BaseModel {
           
         }else{
 
-          qb.orderBy('name','ASC'); 
+          if (order) {
+            qb.orderBy(order.key,order.by); 
+          }else{
+            qb.orderBy('name','ASC'); 
+          }
 
         }
 
